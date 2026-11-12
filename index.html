@@ -120,6 +120,9 @@ main{padding-top:var(--header-h)}
 .viewer-bar button:hover,.viewer-close:hover{color:var(--ink)}
 .viewer-bar button[disabled]{visibility:hidden}
 .viewer-count{color:var(--graphite);font-variant-numeric:tabular-nums}
+.viewer-bar{align-items:center}
+.viewer-arrow{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-9px 0}
+.viewer-arrow svg{display:block}
 .viewer-close{position:absolute;top:16px;right:var(--gutter);font-size:13px}
 
 @media (max-width:900px){
@@ -210,9 +213,9 @@ main{padding-top:var(--header-h)}
   </div>
   <div class="viewer-bar">
     <p class="viewer-cap" id="viewer-cap"></p>
-    <button type="button" id="viewer-prev"><span class="ko">이전</span><span class="en">Prev</span></button>
+    <button type="button" class="viewer-arrow" id="viewer-prev" aria-label="이전 사진 / Previous"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M9 2.5 4.5 7 9 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <span class="viewer-count" id="viewer-count"></span>
-    <button type="button" id="viewer-next"><span class="ko">다음</span><span class="en">Next</span></button>
+    <button type="button" class="viewer-arrow" id="viewer-next" aria-label="다음 사진 / Next"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M5 2.5 9.5 7 5 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
 </div>
 
