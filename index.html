@@ -159,10 +159,10 @@ main{padding-top:var(--header-h)}
   <div class="wrap">
     <a class="brand" href="#top"><span class="ko">민들레</span><span class="en">Dandelion</span></a>
     <nav class="sections" aria-label="섹션 / Sections">
-      <a href="#works"><span class="ko">작업</span><span class="en">Works</span></a>
-      <a href="#exhibition"><span class="ko">전시</span><span class="en">Exhibition</span></a>
-      <a href="#statement"><span class="ko">작가노트</span><span class="en">Statement</span></a>
-      <a href="#about"><span class="ko">소개</span><span class="en">About</span></a>
+      <a href="#works">Works</a>
+      <a href="#exhibition">Exhibition</a>
+      <a href="#statement">Statement</a>
+      <a href="#about">About</a>
     </nav>
     <div class="lang" role="group" aria-label="언어 / Language">
       <button type="button" data-set-lang="ko" aria-pressed="true">KO</button>
@@ -173,22 +173,22 @@ main{padding-top:var(--header-h)}
 
 <main class="wrap">
   <section class="room" id="works">
-    <h2 class="label"><span class="ko">작업</span><span class="en">Works</span></h2>
+    <h2 class="label">Works</h2>
     <div class="body"><div class="grid" id="works-grid"></div></div>
   </section>
 
   <section class="room" id="exhibition">
-    <h2 class="label"><span class="ko">전시</span><span class="en">Exhibition</span></h2>
+    <h2 class="label">Exhibition</h2>
     <div class="body" id="exhibitions"></div>
   </section>
 
   <section class="room" id="statement">
-    <h2 class="label"><span class="ko">작가노트</span><span class="en">Artist Statement</span></h2>
+    <h2 class="label">Artist Statement</h2>
     <div class="body text" id="statement-body"></div>
   </section>
 
   <section class="room" id="about">
-    <h2 class="label"><span class="ko">소개</span><span class="en">About</span></h2>
+    <h2 class="label">About</h2>
     <div class="body text">
       <div id="bio"></div>
       <dl class="rows" id="cv"></dl>
@@ -278,7 +278,7 @@ main{padding-top:var(--header-h)}
       const off = x.poster ? 1 : 0;
       const poster = x.poster ? `<button class="frame ex-poster" type="button" data-set="x${i}" data-img="0">${img(x.poster, `${x.title_ko || ''} 포스터`)}</button>` : '';
       const grid = (x.photos || []).map((p, j) => `<button class="frame" type="button" data-set="x${i}" data-img="${j + off}">${img(p.src, `${x.title_ko || ''} 전시 전경 ${j + 1}`)}</button>`).join('');
-      return `<div class="exhibit" data-ex="${i}" hidden><a class="ex-back" href="#exhibition">${bi('← 전시 목록', '← All exhibitions')}</a>`
+      return `<div class="exhibit" data-ex="${i}" hidden><a class="ex-back" href="#exhibition">${'← Exhibitions'}</a>`
         + `<p class="ex-line">${bi(`${tko(x)} <span class="venue">${place(x, 'ko')}</span>`, `${ten(x)} <span class="venue">${place(x, 'en')}</span>`)}</p>`
         + `<div class="ex-head${x.poster ? '' : ' no-poster'}">${poster}<div class="ex-intro">${intro(x)}</div></div><div class="ex-grid">${grid}</div></div>`;
     }).join('');
