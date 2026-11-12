@@ -75,6 +75,10 @@ content:
       - name: year
         label: 연도
         type: string
+      - name: poster
+        label: 포스터
+        type: image
+        description: 전시 포스터가 있으면 올려 주세요. 없으면 비워 두면 돼요.
       - name: photos
         label: 전시 전경 사진
         type: object

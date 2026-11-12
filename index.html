@@ -82,6 +82,8 @@ main{padding-top:var(--header-h)}
 .ex-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .ex-grid .frame{aspect-ratio:1.6}
 .ex-grid .frame img{object-fit:cover}
+.ex-poster{width:min(320px,100%);aspect-ratio:auto;margin:0 0 16px}
+.ex-poster img{position:static;height:auto}
 
 /* text */
 .text p{margin:0 0 1.4em;max-width:38em;font-size:15px;line-height:1.95}
@@ -238,15 +240,20 @@ main{padding-top:var(--header-h)}
   }
   function renderExhibitions(){
     $('exhibitions').innerHTML = EXS.map((x, i) => {
-      const ko = `《${esc(x.title_ko)}》 <span class="venue">${[esc(x.venue_ko), esc(x.year)].filter(Boolean).join(', ')}</span>`;
-      const en = `<i>${esc(x.title_en || x.title_ko)}</i> <span class="venue">${[esc(x.venue_en || x.venue_ko), esc(x.year)].filter(Boolean).join(', ')}</span>`;
-      const grid = (x.photos || []).map((p, j) => `<button class="frame" type="button" data-set="x${i}" data-img="${j}">${img(p.src, `${x.title_ko || ''} ${j + 1}`)}</button>`).join('');
-      VIEW['x' + i] = (x.photos || []).map(p => ({
+      const place = (v, y) => [esc(v), esc(y)].filter(Boolean).join(', ');
+      const ko = `《${esc(x.title_ko)}》 <span class="venue">${place(x.venue_ko, x.year)}</span>`;
+      const en = `<i>${esc(x.title_en || x.title_ko)}</i> <span class="venue">${place(x.venue_en || x.venue_ko, x.year)}</span>`;
+      // the poster (optional) opens first in the viewer, then the installation views
+      const items = (x.poster ? [{ src: x.poster, poster: true }] : []).concat(x.photos || []);
+      VIEW['x' + i] = items.map(p => ({
         src: url(p.src),
-        ko: `《${esc(x.title_ko)}》 전시 전경, ${[esc(x.venue_ko), esc(x.year)].filter(Boolean).join(', ')}`,
-        en: `Installation view, <i>${esc(x.title_en || x.title_ko)}</i>, ${[esc(x.venue_en || x.venue_ko), esc(x.year)].filter(Boolean).join(', ')}`
+        ko: p.poster ? `《${esc(x.title_ko)}》 포스터` : `《${esc(x.title_ko)}》 전시 전경, ${place(x.venue_ko, x.year)}`,
+        en: p.poster ? `<i>${esc(x.title_en || x.title_ko)}</i>, poster` : `Installation view, <i>${esc(x.title_en || x.title_ko)}</i>, ${place(x.venue_en || x.venue_ko, x.year)}`
       }));
-      return `<div class="exhibit"${i ? ' style="margin-top:96px"' : ''}><p class="ex-line">${bi(ko, en)}</p><div class="ex-grid">${grid}</div></div>`;
+      const off = x.poster ? 1 : 0;
+      const poster = x.poster ? `<button class="frame ex-poster" type="button" data-set="x${i}" data-img="0">${img(x.poster, `${x.title_ko || ''} 포스터`)}</button>` : '';
+      const grid = (x.photos || []).map((p, j) => `<button class="frame" type="button" data-set="x${i}" data-img="${j + off}">${img(p.src, `${x.title_ko || ''} 전시 전경 ${j + 1}`)}</button>`).join('');
+      return `<div class="exhibit"${i ? ' style="margin-top:96px"' : ''}><p class="ex-line">${bi(ko, en)}</p>${poster}<div class="ex-grid">${grid}</div></div>`;
     }).join('');
   }
   const paras = s => String(s || '').split(/\n\s*\n/).map(t => t.trim()).filter(Boolean);
