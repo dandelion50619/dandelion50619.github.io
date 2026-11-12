@@ -1,0 +1,145 @@
+# Pages CMS 설정 — https://app.pagescms.org 에서 이 저장소를 열면 아래 메뉴가 보입니다.
+media:
+  input: media
+  output: /media
+  rename: random
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: works
+    label: 작업
+    type: file
+    path: data/works.json
+    format: json
+    list: true
+    fields:
+      - name: title_ko
+        label: 제목
+        type: string
+        required: true
+      - name: title_en
+        label: 제목 (영문)
+        type: string
+      - name: year
+        label: 연도
+        type: string
+      - name: medium_ko
+        label: 재료
+        type: string
+        description: 예) 종이판넬에 혼합재료
+      - name: medium_en
+        label: 재료 (영문)
+        type: string
+        description: e.g. mixed media on paper panel
+      - name: size_ko
+        label: 크기
+        type: string
+        description: 예) 53 x 45.5cm, 가변크기
+      - name: size_en
+        label: 크기 (영문)
+        type: string
+      - name: photos
+        label: 사진
+        description: 첫 번째 사진이 목록에 대표로 보여요. 순서는 끌어서 바꿀 수 있어요.
+        type: object
+        list: true
+        fields:
+          - name: src
+            label: 사진
+            type: image
+            required: true
+          - name: detail
+            label: 부분 사진(디테일)이면 켜기
+            type: boolean
+
+  - name: exhibitions
+    label: 전시
+    type: file
+    path: data/exhibitions.json
+    format: json
+    list: true
+    fields:
+      - name: title_ko
+        label: 전시 제목
+        type: string
+        required: true
+      - name: title_en
+        label: 전시 제목 (영문)
+        type: string
+      - name: venue_ko
+        label: 장소
+        type: string
+      - name: venue_en
+        label: 장소 (영문)
+        type: string
+      - name: year
+        label: 연도
+        type: string
+      - name: photos
+        label: 전시 전경 사진
+        type: object
+        list: true
+        fields:
+          - name: src
+            label: 사진
+            type: image
+            required: true
+
+  - name: statement
+    label: 작가노트
+    type: file
+    path: data/statement.json
+    format: json
+    fields:
+      - name: ko
+        label: 작가노트
+        type: text
+        description: 문단 사이는 빈 줄 하나로 띄워 주세요.
+      - name: en
+        label: 작가노트 (영문)
+        type: text
+
+  - name: about
+    label: 소개 · CV · 연락처
+    type: file
+    path: data/about.json
+    format: json
+    fields:
+      - name: bio_ko
+        label: 작가 소개
+        type: text
+      - name: bio_en
+        label: 작가 소개 (영문)
+        type: text
+      - name: cv
+        label: CV
+        description: 한 줄씩 추가해요. 위에서부터 순서대로 보여요. 영문 전시 제목은 *별표*로 감싸면 기울임꼴이 돼요.
+        type: object
+        list: true
+        fields:
+          - name: category_ko
+            label: 구분
+            type: string
+            description: 예) 학력, 개인전, 단체전, 수상, 선정
+          - name: category_en
+            label: 구분 (영문)
+            type: string
+            description: e.g. Education, Solo Exhibition, Group Exhibition, Award
+          - name: year
+            label: 연도
+            type: string
+          - name: entry_ko
+            label: 내용
+            type: string
+            description: 예) 《전시 제목》, 장소
+          - name: entry_en
+            label: 내용 (영문)
+            type: string
+            description: e.g. *Exhibition Title*, Venue, City
+      - name: email
+        label: 이메일
+        type: string
+      - name: instagram
+        label: 인스타그램 아이디
+        type: string
+        description: '@ 없이 아이디만'

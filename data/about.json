@@ -1,0 +1,36 @@
+{
+  "bio_ko": "민들레(b. 2006)는 세종대학교 회화과에 재학 중이다. 감정의 물성을 탐구하며, 덮여버린 감각을 꺼내는 작업을 한다. 내재된 이야기들이 작업의 표면으로 드러나는 찰나에 주목하며, 보여짐으로써 완성되는 모습을 시각화한다. 고정되지 않는 감정의 결을 시각적으로 치환하여 관객과 자신의 감각을 공유하고자 한다.",
+  "bio_en": "Dandelion (b. 2006) is a painting student at Sejong University, Seoul. Exploring the materiality of emotion, she draws out sensations that have been covered over. Attentive to the instant when the stories held within rise to the surface of a work, she visualizes how a work is completed by being seen. Translating the unfixed textures of emotion into visual form, she seeks to share her own senses with the viewer.",
+  "cv": [
+    {
+      "category_ko": "학력",
+      "category_en": "Education",
+      "year": "2025–",
+      "entry_ko": "세종대학교 회화과 재학",
+      "entry_en": "BFA in Painting (in progress), Sejong University, Seoul"
+    },
+    {
+      "category_ko": "개인전",
+      "category_en": "Solo Exhibition",
+      "year": "2026",
+      "entry_ko": "《기막(肌膜): 녹이기 그리고 보이기》, 공간파도",
+      "entry_en": "*Gimak (肌膜): Melting and Revealing*, Space Pado, Seoul"
+    },
+    {
+      "category_ko": "단체전",
+      "category_en": "Group Exhibition",
+      "year": "2026",
+      "entry_ko": "《대한민국 젊은작가 응원 프로젝트전 2026》, 우현문 갤러리",
+      "entry_en": "*Korea Young Artists Support Project 2026*, Woohyunmun Gallery, Incheon"
+    },
+    {
+      "category_ko": "선정",
+      "category_en": "Selected",
+      "year": "2026",
+      "entry_ko": "숨마문화재단 2026 NEXT ARTIST 지원사업 선정",
+      "entry_en": "2026 NEXT ARTIST Grant, Summa Cultural Foundation"
+    }
+  ],
+  "email": "dandelion50619@gmail.com",
+  "instagram": "dhfl_5ms"
+}
