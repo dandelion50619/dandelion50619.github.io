@@ -75,10 +75,22 @@ content:
       - name: year
         label: 연도
         type: string
+      - name: dates
+        label: 전시 기간
+        type: string
+        description: 예) 2026.10.05–10.11 (비워 두면 연도만 보여요)
       - name: poster
         label: 포스터
         type: image
-        description: 전시 포스터가 있으면 올려 주세요. 없으면 비워 두면 돼요.
+        description: 전시 목록에는 포스터만 보이고, 누르면 전시 정보·서문·전경 사진이 떠요. 없으면 첫 번째 전경 사진이 대신 보여요.
+      - name: intro_ko
+        label: 전시 서문
+        type: text
+        description: 문단 사이는 빈 줄 하나로 띄워 주세요.
+      - name: intro_en
+        label: 전시 서문 (영문)
+        type: text
+        description: 비워 두면 영어 화면에도 한국어 서문이 보여요.
       - name: photos
         label: 전시 전경 사진
         type: object
