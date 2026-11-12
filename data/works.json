@@ -146,6 +146,10 @@
     "size_en": "dimensions variable",
     "photos": [
       {
+        "src": "/media/works/piecing-0.jpg",
+        "detail": false
+      },
+      {
         "src": "/media/works/piecing-1.jpg",
         "detail": false
       },
