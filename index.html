@@ -198,7 +198,7 @@ main{padding-top:var(--header-h)}
 </main>
 
 <footer class="wrap" id="foot">
-  <div class="foot">© <span id="year"></span> <span class="ko">민들레</span><span class="en">Dandelion</span></div>
+  <div class="foot">© <span class="ko">민들레</span><span class="en">Dandelion</span></div>
 </footer>
 
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -453,7 +453,6 @@ main{padding-top:var(--header-h)}
   })();
 
   /* ---------- load content ---------- */
-  $('year').textContent = new Date().getFullYear();
   const get = name => fetch(`data/${name}.json`, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(name); return r.json(); });
   Promise.all([get('works'), get('exhibitions'), get('statement'), get('about')]).then(([w, x, s, a]) => {
     WORKS = Array.isArray(w) ? w : []; EXS = Array.isArray(x) ? x : [];
