@@ -96,6 +96,11 @@ main{padding-top:var(--header-h)}
 .ex-head .ex-poster{margin:0}
 .ex-head.no-poster{grid-template-columns:minmax(0,1fr)}
 .ex-intro p{margin:0 0 1.2em;max-width:38em;font-size:14px;line-height:1.9}
+.ex-intro .ex-lead{font-size:clamp(17px,1.6vw,21px);line-height:1.75;margin:0 0 28px;max-width:24em;white-space:pre-line}
+.ex-more summary{display:inline-block;list-style:none;cursor:pointer;font-size:13px;color:var(--graphite);border-bottom:1px solid var(--hairline);margin:0 0 24px}
+.ex-more summary::-webkit-details-marker{display:none}
+.ex-more summary:hover{color:var(--ink)}
+.ex-more[open] .when-closed,.ex-more:not([open]) .when-open{display:none}
 
 /* text */
 .text p{margin:0 0 1.4em;max-width:38em;font-size:15px;line-height:1.95}
@@ -262,8 +267,15 @@ main{padding-top:var(--header-h)}
     };
     const tko = x => `《${esc(x.title_ko)}》`, ten = x => `<i>${esc(x.title_en || x.title_ko)}</i>`;
     // exhibition text (서문); the English view falls back to Korean when there is no translation
-    const intro = x => paras(x.intro_ko).map(s => `<p class="ko" lang="ko">${fmt(s)}</p>`).join('')
+    // 서문: the short text (lead) first; the long text opens on demand for those who want more
+    const longText = x => paras(x.intro_ko).map(s => `<p class="ko" lang="ko">${fmt(s)}</p>`).join('')
       + paras(x.intro_en || x.intro_ko).map(s => `<p class="en" lang="${x.intro_en ? 'en' : 'ko'}">${fmt(s)}</p>`).join('');
+    const intro = x => {
+      const lead = x.lead_ko ? `<p class="ex-lead ko" lang="ko">${fmt(x.lead_ko)}</p><p class="ex-lead en" lang="${x.lead_en ? 'en' : 'ko'}">${fmt(x.lead_en || x.lead_ko)}</p>` : '';
+      if (!lead) return longText(x);
+      if (!x.intro_ko) return lead;
+      return lead + `<details class="ex-more"><summary><span class="when-closed">${bi('서문 전문 보기', 'Read the full text')}</span><span class="when-open">${bi('접기', 'Close')}</span></summary>${longText(x)}</details>`;
+    };
     // list: posters only; the exhibition info shows after a poster is clicked
     const list = EXS.map((x, i) => {
       const cover = x.poster || ((x.photos || [])[0] || {}).src;

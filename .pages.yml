@@ -83,14 +83,22 @@ content:
         label: 포스터
         type: image
         description: 전시 목록에는 포스터만 보이고, 누르면 전시 정보·서문·전경 사진이 떠요. 없으면 첫 번째 전경 사진이 대신 보여요.
-      - name: intro_ko
-        label: 전시 서문
+      - name: lead_ko
+        label: 서문
         type: text
-        description: 문단 사이는 빈 줄 하나로 띄워 주세요.
-      - name: intro_en
-        label: 전시 서문 (영문)
+        description: 전시 정보에 크게 보이는 짧은 서문이에요.
+      - name: lead_en
+        label: 서문 (영문)
         type: text
         description: 비워 두면 영어 화면에도 한국어 서문이 보여요.
+      - name: intro_ko
+        label: 서문 전문 (자세한 글)
+        type: text
+        description: "'서문 전문 보기'를 누르면 펼쳐지는 긴 글이에요. 문단 사이는 빈 줄 하나로 띄워 주세요."
+      - name: intro_en
+        label: 서문 전문 (영문)
+        type: text
+        description: 비워 두면 영어 화면에도 한국어 글이 보여요.
       - name: photos
         label: 전시 전경 사진
         type: object
