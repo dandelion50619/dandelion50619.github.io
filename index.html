@@ -331,7 +331,10 @@ main{padding-top:var(--header-h)}
     vPrev.disabled = vNext.disabled = L.length < 2;
     [1, -1].forEach(d => { const n = L[(cur.i + d + L.length) % L.length]; if (n) new Image().src = n.src; });
   }
-  function open(set, i){ cur = { set, i }; lastFocus = document.activeElement; viewer.hidden = false; document.body.style.overflow = 'hidden'; render(); vClose.focus(); }
+  function open(set, i){
+    const n = +set.slice(1), it = set[0] === 'w' ? WORKS[n] : EXS[n];
+    if (it) track({ path: (set[0] === 'w' ? 'work/' : 'exhibition-photos/') + it.title_ko, title: set[0] === 'w' ? `작품 〈${it.title_ko}〉` : `전시 사진 《${it.title_ko}》`, event: true });
+    cur = { set, i }; lastFocus = document.activeElement; viewer.hidden = false; document.body.style.overflow = 'hidden'; render(); vClose.focus(); }
   function close(){ viewer.hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
   function step(d){ const L = list(); if (L.length < 2) return; cur.i = (cur.i + d + L.length) % L.length; render(); }
   document.addEventListener('click', e => { const b = e.target.closest('[data-set]'); if (b) open(b.dataset.set, +b.dataset.img || 0); });
@@ -355,6 +358,24 @@ main{padding-top:var(--header-h)}
   }
   document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang, true)));
 
+  /* ---------- visit counter (GoatCounter, no cookies) ----------
+     Put the GoatCounter code here to start counting, e.g. 'seedswillscatter'
+     (stats then live at https://seedswillscatter.goatcounter.com). Empty = off. */
+  const GC = '';
+  const gcWait = [];
+  function track(o){
+    if (!GC) return;
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count(o); else gcWait.push(o);
+  }
+  if (GC) {
+    window.goatcounter = { no_onload: true };
+    const s = document.createElement('script');
+    s.async = true; s.src = 'https://gc.zgo.at/count.js'; s.dataset.goatcounter = `https://${GC}.goatcounter.com/count`;
+    s.onload = () => gcWait.splice(0).forEach(o => window.goatcounter.count(o));
+    document.head.appendChild(s);
+  }
+  const PAGE = { home: '첫 화면', works: 'Works', exhibition: 'Exhibition', statement: 'Statement', about: 'About' };
+
   /* ---------- menu: one view at a time ---------- */
   const links = [...document.querySelectorAll('.sections a')];
   const ROUTES = ['works', 'exhibition', 'statement', 'about'];
@@ -368,6 +389,8 @@ main{padding-top:var(--header-h)}
     if (r === 'exhibition') showExhibition();
     if (!viewer.hidden) close();
     window.scrollTo(0, 0);
+    const ex = location.hash.match(/^#exhibition\/(\d+)$/), x = ex && EXS[+ex[1]];
+    track({ path: '/' + (location.hash || ''), title: x ? `Exhibition · ${x.title_ko}` : PAGE[r] });
   }
   window.addEventListener('hashchange', route);
   route();
