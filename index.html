@@ -53,6 +53,12 @@ i{font-style:italic}
 .cover a{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(24px,3vw,46px);line-height:1.25;letter-spacing:-.005em;color:var(--ink)}
 .cover a:hover{color:var(--ink)}
 .cover a span{display:block}
+/* with a work on the cover (data/home.json): the work large in the middle, the name under it */
+.cover.has-work a{position:static;transform:none;height:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,3.5vh,40px);padding:clamp(24px,6vh,64px) var(--gutter)}
+.cover-work{margin:0;min-height:0;display:flex;flex-direction:column;align-items:center}
+.cover-work img{display:block;width:auto;height:auto;max-width:min(100%,1200px);max-height:calc(100svh - 280px);object-fit:contain}
+.cover-work figcaption{margin-top:10px;font-size:12px;line-height:1.5;color:var(--graphite);text-align:center}
+.cover.has-work .cover-title{font-size:clamp(20px,2.2vw,32px)}
 main{padding-top:var(--header-h)}
 .top .wrap{display:flex;align-items:center;gap:28px;min-height:var(--header-h);font-size:13px}
 .brand{font-weight:500;letter-spacing:.02em}
@@ -161,7 +167,7 @@ main{padding-top:var(--header-h)}
 </head>
 <body>
 <div class="cover" id="top">
-  <a href="#works"><span><span class="ko">민들레</span><span class="en">Dandelion</span></span><span>portfolio</span></a>
+  <a href="#works"><span class="cover-title"><span><span class="ko">민들레</span><span class="en">Dandelion</span></span><span>portfolio</span></span></a>
 </div>
 
 <header class="top">
@@ -490,6 +496,21 @@ main{padding-top:var(--header-h)}
     }
     if (fine) root.classList.add('fx-on');
   })();
+
+  /* ---------- cover work (optional) ---------- */
+  fetch('data/home.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(h => {
+    if (!h || !h.image) return;
+    const full = url(h.image), small = thumb(h.image);
+    const ko = [h.title_ko ? `〈${esc(h.title_ko)}〉` : '', esc(h.year)].filter(Boolean).join(', ');
+    const en = [h.title_en || h.title_ko ? `<i>${esc(h.title_en || h.title_ko)}</i>` : '', esc(h.year)].filter(Boolean).join(', ');
+    const fig = document.createElement('figure');
+    fig.className = 'cover-work';
+    fig.innerHTML = `<img src="${esc(small)}" srcset="${esc(small)} 1200w, ${esc(full)} 3600w" sizes="(max-width: 700px) 92vw, 70vw" data-full="${esc(full)}" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.full" alt="${esc(h.title_ko || '')} ${esc(h.title_en || '')}">`
+      + (ko ? `<figcaption>${bi(ko, en)}</figcaption>` : '');
+    const link = $('top').querySelector('a');
+    link.insertBefore(fig, link.firstChild);
+    $('top').classList.add('has-work');
+  }).catch(() => {});
 
   /* ---------- load content ---------- */
   const get = name => fetch(`data/${name}.json`, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(name); return r.json(); });

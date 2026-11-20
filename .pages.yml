@@ -6,6 +6,26 @@ media:
   extensions: [jpg, jpeg, png, webp]
 
 content:
+  - name: home
+    label: 첫 화면
+    type: file
+    path: data/home.json
+    format: json
+    fields:
+      - name: image
+        label: 첫 화면 작품 사진
+        type: image
+        description: 첫 화면 가운데에 크게 보여요. 비워 두면 '민들레 portfolio' 글자만 보여요.
+      - name: title_ko
+        label: 작품 제목
+        type: string
+      - name: title_en
+        label: 작품 제목 (영문)
+        type: string
+      - name: year
+        label: 연도
+        type: string
+
   - name: works
     label: 작업
     type: file
