@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#C9A6C2">
 <title>민들레 Dandelion</title>
 <meta name="description" content="민들레 포트폴리오. Dandelion, painting, Seoul.">
 <meta property="og:title" content="민들레 Dandelion">
@@ -15,11 +16,11 @@
 :root{
   /* Layout: one quiet column system taken from the PDF portfolio.
      Small labels on the left, everything else starts at the same edge on the right.
-     The page is the grey of the photographed gallery wall, so the works sit on it. */
-  --wall:#F2F2F1;
-  --ink:#1B1B1C;
-  --graphite:#6A6A6E;
-  --hairline:#DCDCDA;
+     The page is a deep orchid (진자주) chosen by the artist. */
+  --wall:#C9A6C2;
+  --ink:#170F15;
+  --graphite:#3F2E3A;
+  --hairline:#B48FAD;
   --alert:#9B2C2C;
   --font:"IBM Plex Sans KR","Apple SD Gothic Neo","Noto Sans CJK KR","Malgun Gothic",system-ui,sans-serif;
   --gutter:clamp(16px,4vw,48px);
@@ -413,7 +414,7 @@ main{padding-top:var(--header-h)}
     function bubble(x, y, r, a){
       g.beginPath(); g.arc(x, y, r, 0, TAU);
       g.fillStyle = `rgba(255,255,255,${0.2 * a})`; g.fill();
-      g.lineWidth = 1; g.strokeStyle = `rgba(27,27,28,${0.5 * a})`; g.stroke();
+      g.lineWidth = 1; g.strokeStyle = `rgba(23,15,21,${0.5 * a})`; g.stroke();
       if (r > 6) { g.beginPath(); g.arc(x, y, r + 1, 0, TAU); g.strokeStyle = `rgba(255,255,255,${0.55 * a})`; g.stroke(); }
       g.beginPath(); g.arc(x, y, r * 0.84, Math.PI * 0.15, Math.PI * 0.62);
       g.strokeStyle = `rgba(125,97,119,${0.4 * a})`; g.lineWidth = 1; g.stroke();
@@ -423,11 +424,11 @@ main{padding-top:var(--header-h)}
     function popped(p){
       const t = p.pop, k = 1 - t;
       g.beginPath(); g.arc(p.x, p.y, p.r * (1 + t), 0, TAU);
-      g.strokeStyle = `rgba(27,27,28,${0.35 * k})`; g.lineWidth = 1; g.stroke();
+      g.strokeStyle = `rgba(23,15,21,${0.35 * k})`; g.lineWidth = 1; g.stroke();
       for (let i = 0; i < 5; i++) {
         const an = i * 1.2566 + p.r, d = p.r * (1 + t * 1.8);
         g.beginPath(); g.arc(p.x + Math.cos(an) * d, p.y + Math.sin(an) * d, Math.max(0.6, p.r * 0.12 * k), 0, TAU);
-        g.fillStyle = `rgba(27,27,28,${0.4 * k})`; g.fill();
+        g.fillStyle = `rgba(23,15,21,${0.4 * k})`; g.fill();
       }
     }
     const P = [];
@@ -482,7 +483,7 @@ main{padding-top:var(--header-h)}
       if (cur.show && !cur.hide) {
         cur.x += (cur.tx - cur.x) * 0.25; cur.y += (cur.ty - cur.y) * 0.25; cur.r += (cur.tr - cur.r) * 0.2;
         bubble(cur.x, cur.y, cur.r, 1);
-        g.beginPath(); g.arc(cur.tx, cur.ty, 2, 0, TAU); g.fillStyle = 'rgba(27,27,28,.9)'; g.fill();
+        g.beginPath(); g.arc(cur.tx, cur.ty, 2, 0, TAU); g.fillStyle = 'rgba(23,15,21,.9)'; g.fill();
         if (Math.abs(cur.tx - cur.x) > 0.2 || Math.abs(cur.ty - cur.y) > 0.2 || Math.abs(cur.tr - cur.r) > 0.1) busy = true;
       }
       if (busy) kick();
